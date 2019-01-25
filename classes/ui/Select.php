@@ -398,6 +398,6 @@
 	{
 		$html = "";
 		foreach ( $arr as $key => $val )
-			$html .= "<option value=\"" . sanitize($key) . "\"" . ($value == $key ? "selected" : "") . ">" . t(sanitize($val)) . "</option>";
+			$html .= "<option value=\"" . sanitize($key) . "\"" . ($value == $key ? " selected" : "") . ">" . t(sanitize($val)) . "</option>";
 		return $html;
 	}
