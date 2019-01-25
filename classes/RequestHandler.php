@@ -549,6 +549,15 @@ class RequestHandler
                 TRUE,
                 FALSE);
                 $values = $rowData[0];
+
+                // Don't import empty rows
+                if (
+                    strlen($values[0]) === 0 ||
+                    strlen($values[1]) === 0
+                ) {
+                    continue;
+                }
+
                 $otvet = app()->query("insert into  insuredperson (policyId, code, name, phone)
                 values($policyId, '$values[0]', '$values[1]', '$values[2]')");
 
