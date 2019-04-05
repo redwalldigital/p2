@@ -170,28 +170,13 @@
 
 		protected function setThisMonthPeriod($obj, $f1, $f2)
 		{
-					$y = date("Y");
-					$m = date("m");
-					$dt1 = "$y-$m-01";
-					$m = 1 + $m;
-					if($m > 12)
-					{
-						$y++;
-						$m = 1;
-					}
-					$dt2 = "$y-$m-01";
+			$dt1 = date('Y-m-d', strtotime('first day of this month'));
+			$dt2 = date('Y-m-d', strtotime('last day of this month'));
 
-					$d1 = strtotime($dt1);
-					$d2 = strtotime($dt2) - SECS_DAY;
+			$f = getFormatter(FORMAT_DATE);
 
-					$dt1 = date("Y-m-d", $d1);
-					$dt2 = date("Y-m-d", $d2);
-
-					$f = getFormatter(FORMAT_DATE);
-
-
-					$obj->setValue($f1, $f->encodeHuman($dt1));
-					$obj->setValue($f2, $f->encodeHuman($dt2));
+			$obj->setValue($f1, $f->encodeHuman($dt1));
+			$obj->setValue($f2, $f->encodeHuman($dt2));
 		}
 
 		public function thisMonth()
@@ -211,25 +196,10 @@
 			if(($f1 = app()->request("f1")) && ($f2 = app()->request("f2")))
 				if(is_object($c = $this->getContext()))
 				{
-					$y = date("Y");
-					$m = date("m");
-					$dt2 = "$y-$m-01";
-					$m = $m - 1;
-					if($m < 1)
-					{
-						$y--;
-						$m = 12;
-					}
-					$dt1 = "$y-$m-01";
-
-					$d1 = strtotime($dt1);
-					$d2 = strtotime($dt2) - SECS_DAY;
-
-					$dt1 = date("Y-m-d", $d1);
-					$dt2 = date("Y-m-d", $d2);
+					$dt1 = date('Y-m-d', strtotime('first day of previous month'));
+					$dt2 = date('Y-m-d', strtotime('last day of previous month'));
 
 					$f = getFormatter(FORMAT_DATE);
-
 
 					$c->obj->setValue($f1, $f->encodeHuman($dt1));
 					$c->obj->setValue($f2, $f->encodeHuman($dt2));
