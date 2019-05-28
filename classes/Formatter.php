@@ -226,7 +226,7 @@
             if($s == "")
                 return "NULL";
             else
-                return date(FORMATSTRING_DATE_MACHINE, date_create_from_format(FORMATSTRING_DATETIME_HUMAN, $s)->getTimestamp());
+                return date(FORMATSTRING_DATETIME_MACHINE, date_create_from_format(FORMATSTRING_DATETIME_HUMAN, $s)->getTimestamp());
         }
     }
 
